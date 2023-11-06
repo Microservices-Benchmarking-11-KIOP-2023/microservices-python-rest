@@ -4,8 +4,8 @@ import requests
 app = Flask(__name__)
 
 SEARCH_SERVICE_PORT = 5001
-GEO_SERVICE_ADDRESS = 'http://localhost:5003/geo'
-RATE_SERVICE_ADDRESS = 'http://localhost:5004/rate'
+GEO_SERVICE_ADDRESS = 'http://geo-service:5003/geo'
+RATE_SERVICE_ADDRESS = 'http://rate-service:5004/rate'
 
 
 @app.route('/search', methods=['GET'])
@@ -32,4 +32,4 @@ def search_nearby():
 
 
 def serve():
-    app.run(port=SEARCH_SERVICE_PORT, debug=True)
+    app.run(host='0.0.0.0', port=SEARCH_SERVICE_PORT, debug=True)

@@ -7,7 +7,7 @@ app = Flask(__name__)
 PROFILE_SERVICE_PORT = 5002
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-json_filepath = os.path.join(current_dir, '..', 'data', 'hotels.json')
+json_filepath = os.path.join(current_dir, 'data', 'hotels.json')
 
 
 def load_profiles(hotel_ids, file_path):
@@ -52,4 +52,4 @@ def get_profiles():
 
 
 def serve():
-    app.run(port=PROFILE_SERVICE_PORT, debug=True)
+    app.run(host='0.0.0.0', port=PROFILE_SERVICE_PORT, debug=True)

@@ -9,7 +9,7 @@ app = Flask(__name__)
 RATE_SERVICE_PORT = 5004
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-json_filepath = os.path.join(current_dir, '..', 'data', 'inventory.json')
+json_filepath = os.path.join(current_dir, 'data', 'inventory.json')
 
 
 class RoomType:
@@ -104,4 +104,4 @@ def get_rates_endpoint():
 
 
 def serve():
-    app.run(port=RATE_SERVICE_PORT, debug=True)
+    app.run(host='0.0.0.0', port=RATE_SERVICE_PORT, debug=True)

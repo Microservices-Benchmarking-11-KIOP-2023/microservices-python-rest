@@ -1,4 +1,4 @@
-from services.profile.profile import serve
+from profile import serve
 
 if __name__ == "__main__":
     serve()

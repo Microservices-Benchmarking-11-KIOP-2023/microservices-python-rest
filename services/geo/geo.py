@@ -11,7 +11,7 @@ EARTH_RADIUS_KM = 6371.0
 MAX_SEARCH_RADIUS_KM = 10  # limit to 10 km
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-json_filepath = os.path.join(current_dir, '..', 'data', 'geo.json')
+json_filepath = os.path.join(current_dir, 'data', 'geo.json')
 
 
 @dataclass
@@ -68,4 +68,4 @@ def nearby_hotels():
 
 
 def serve():
-    app.run(port=GEO_SERVICE_PORT, debug=True)
+    app.run(host='0.0.0.0', port=GEO_SERVICE_PORT, debug=True)

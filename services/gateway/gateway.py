@@ -3,8 +3,8 @@ import requests
 
 app = Flask(__name__)
 
-SEARCH_SERVICE_URL = 'http://localhost:5001/search'
-PROFILE_SERVICE_URL = 'http://localhost:5002/profile'
+SEARCH_SERVICE_URL = 'http://search-service:5001/search'
+PROFILE_SERVICE_URL = 'http://profile-service:5002/profile'
 
 
 @app.route('/hotels', methods=['GET'])
@@ -42,4 +42,4 @@ def get_hotels():
 
 
 if __name__ == "__main__":
-    app.run(port=5000)
+    app.run(host='0.0.0.0', port=8080)

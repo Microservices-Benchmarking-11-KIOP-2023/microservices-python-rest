@@ -1,4 +1,4 @@
-from services.geo.geo import serve
+from geo import serve
 
 if __name__ == "__main__":
     serve()
