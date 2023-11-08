@@ -3,8 +3,8 @@ import requests
 
 app = Flask(__name__)
 
-SEARCH_SERVICE_URL = 'http://search-service:8080/search'
-PROFILE_SERVICE_URL = 'http://profile-service:8080/profile'
+SEARCH_SERVICE_URL = 'http://search:8080/search'
+PROFILE_SERVICE_URL = 'http://profile:8080/profile'
 
 
 @app.route('/hotels', methods=['GET'])
