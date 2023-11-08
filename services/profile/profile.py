@@ -4,7 +4,7 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-PROFILE_SERVICE_PORT = 5002
+PROFILE_SERVICE_PORT = 8080
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 json_filepath = os.path.join(current_dir, 'data', 'hotels.json')

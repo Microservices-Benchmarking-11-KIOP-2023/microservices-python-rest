@@ -6,7 +6,7 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-GEO_SERVICE_PORT = 5003
+GEO_SERVICE_PORT = 8080
 EARTH_RADIUS_KM = 6371.0
 MAX_SEARCH_RADIUS_KM = 10  # limit to 10 km
 

@@ -3,9 +3,9 @@ import requests
 
 app = Flask(__name__)
 
-SEARCH_SERVICE_PORT = 5001
-GEO_SERVICE_ADDRESS = 'http://geo-service:5003/geo'
-RATE_SERVICE_ADDRESS = 'http://rate-service:5004/rate'
+SEARCH_SERVICE_PORT = 8080
+GEO_SERVICE_ADDRESS = 'http://geo-service:8080/geo'
+RATE_SERVICE_ADDRESS = 'http://rate-service:8080/rate'
 
 
 @app.route('/search', methods=['GET'])

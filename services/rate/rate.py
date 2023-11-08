@@ -6,7 +6,7 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-RATE_SERVICE_PORT = 5004
+RATE_SERVICE_PORT = 8080
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 json_filepath = os.path.join(current_dir, 'data', 'inventory.json')
@@ -104,4 +104,4 @@ def get_rates_endpoint():
 
 
 def serve():
-    app.run(host='0.0.0.0', port=RATE_SERVICE_PORT, debug=True)
+    app.run(host='0.0.0.0', port=8080, debug=True)
