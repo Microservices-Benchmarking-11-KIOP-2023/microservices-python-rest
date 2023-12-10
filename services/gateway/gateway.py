@@ -33,10 +33,10 @@ def get_hotels():
 
     # Convert the REST API response to a desired JSON format
     hotels = [{
-        'id': hotel['id'],
-        'coordinates': {'lat': hotel['address']['lat'], 'lon': hotel['address']['lon']},
-        'properties': {'name': hotel['name'], 'phone_number': hotel['phoneNumber']}
-    } for hotel in profile_response]
+        'type': 'Feature', 'id': hotel['id'],
+        'properties': {'name': hotel['name'], 'phone_number': hotel['phoneNumber']},
+        'geometry': {'type': 'Point', 'coordinates': [hotel['address']['lat'], hotel['address']['lon']]}} for hotel in
+        profile_response]
 
     return jsonify(hotels)
 
