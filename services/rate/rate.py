@@ -1,4 +1,4 @@
-import pickle
+import json
 import os
 from typing import List
 
@@ -9,7 +9,7 @@ app = Flask(__name__)
 RATE_SERVICE_PORT = 8080
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-pickle_filepath = os.path.join(current_dir, 'data', 'inventory.pkl')
+json_filepath = os.path.join(current_dir, 'data', 'inventory.json')
 
 
 class RoomType:
@@ -37,8 +37,8 @@ class Result:
 
 
 def get_rates(hotelIds: List[str], inDate: str, outDate: str) -> Result:
-    with open(pickle_filepath, 'rb') as file:
-        data = pickle.load(file)
+    with open(json_filepath, 'r') as file:
+        data = json.load(file)
 
     filtered_data = [rate for rate in data if
                      rate['hotelId'] in hotelIds and rate['inDate'] >= inDate and rate['outDate'] <= outDate]
