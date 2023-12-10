@@ -29,7 +29,7 @@ def get_hotels():
     profile_payload = {
         "hotelIds": hotel_ids
     }
-    profile_response = requests.get(PROFILE_SERVICE_URL, params=profile_payload).json()
+    profile_response = requests.post(PROFILE_SERVICE_URL, json=profile_payload).json()
 
     # Convert the REST API response to a desired JSON format
     hotels = [{
