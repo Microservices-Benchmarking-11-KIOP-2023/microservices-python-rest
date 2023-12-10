@@ -6,10 +6,17 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
+global_data = None
 RATE_SERVICE_PORT = 8080
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 json_filepath = os.path.join(current_dir, 'data', 'inventory.json')
+
+
+def load_data():
+    global global_data
+    with open(json_filepath, 'r') as file:
+        global_data = json.load(file)
 
 
 class RoomType:
@@ -37,11 +44,10 @@ class Result:
 
 
 def get_rates(hotelIds: List[str], inDate: str, outDate: str) -> Result:
-    with open(json_filepath, 'r') as file:
-        data = json.load(file)
+    hotelIds_set = set(hotelIds)
+    filtered_data = [rate for rate in global_data if
+                     rate['hotelId'] in hotelIds_set and rate['inDate'] == inDate and rate['outDate'] == outDate]
 
-    filtered_data = [rate for rate in data if
-                     rate['hotelId'] in hotelIds and rate['inDate'] >= inDate and rate['outDate'] <= outDate]
     ratePlans = []
     for rate in filtered_data:
         roomType_data = rate['roomType']
@@ -104,4 +110,5 @@ def get_rates_endpoint():
 
 
 def serve():
+    load_data()
     app.run(host='0.0.0.0', port=8080, debug=True)
