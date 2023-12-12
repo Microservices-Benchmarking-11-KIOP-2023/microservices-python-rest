@@ -52,7 +52,3 @@ def get_hotels():
     except Exception as e:
         logging.error(f"An unexpected error occurred: {e}")
         return jsonify({'error': 'Internal server error'}), 500
-
-
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8080)

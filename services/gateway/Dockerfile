@@ -12,4 +12,4 @@ COPY services/gateway .
 
 EXPOSE 8080
 
-CMD ["python", "gateway.py"]
+CMD ["python", "main.py"]

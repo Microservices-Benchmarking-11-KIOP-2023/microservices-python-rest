@@ -1,4 +1,4 @@
-from search import serve
+from src.search import serve
 
 if __name__ == "__main__":
     serve()
