@@ -1,17 +1,16 @@
 import json
 import math
-import os
 from dataclasses import dataclass
+
 from flask import Flask, jsonify, request
+
+from data.data_load_module import load_data, data_store
 
 app = Flask(__name__)
 
 GEO_SERVICE_PORT = 8080
 EARTH_RADIUS_KM = 6371.0
 MAX_SEARCH_RADIUS_KM = 10  # limit to 10 km
-
-current_dir = os.path.dirname(os.path.abspath(__file__))
-json_filepath = os.path.join(current_dir, 'data', 'geo.json')
 
 
 @dataclass
@@ -27,16 +26,14 @@ def load_hotels(json_filepath):
 
 
 def haversine_distance(coord1, coord2):
-    lat1 = coord1.point_latitude
-    lon1 = coord1.point_longitude
-    lat2 = coord2.point_latitude
-    lon2 = coord2.point_longitude
+    lat1, lon1 = map(math.radians, [coord1.point_latitude, coord1.point_longitude])
+    lat2, lon2 = map(math.radians, [coord2.point_latitude, coord2.point_longitude])
 
-    dlat = math.radians(lat2 - lat1)
-    dlon = math.radians(lon2 - lon1)
+    dlat = lat2 - lat1
+    dlon = lon2 - lon1
 
-    a = math.sin(dlat / 2) * math.sin(dlat / 2) + math.cos(math.radians(lat1)) * math.cos(
-        math.radians(lat2)) * math.sin(dlon / 2) * math.sin(dlon / 2)
+    a = math.sin(dlat / 2) * math.sin(dlat / 2) + math.cos(lat1) * math.cos(
+        lat2) * math.sin(dlon / 2) * math.sin(dlon / 2)
     c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
 
     return EARTH_RADIUS_KM * c
@@ -61,11 +58,12 @@ def nearby_hotels():
     lon = float(request.args.get('lon'))
     point = Point(point_latitude=lat, point_longitude=lon)
 
-    hotels = load_hotels(json_filepath)
-    nearby_hotel_ids = find_nearby_hotels(hotels, point, MAX_SEARCH_RADIUS_KM)
+    hotels = data_store.get('geo.json', [])
+    hotel_ids = find_nearby_hotels(hotels, point, MAX_SEARCH_RADIUS_KM)
 
-    return jsonify({"hotelIds": nearby_hotel_ids})
+    return jsonify({"hotelIds": hotel_ids})
 
 
 def serve():
-    app.run(host='0.0.0.0', port=GEO_SERVICE_PORT, debug=True)
+    load_data()
+    app.run(host='0.0.0.0', port=GEO_SERVICE_PORT)

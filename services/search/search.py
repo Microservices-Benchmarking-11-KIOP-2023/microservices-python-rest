@@ -1,5 +1,5 @@
-from flask import Flask, jsonify, request
 import requests
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
@@ -32,4 +32,4 @@ def search_nearby():
 
 
 def serve():
-    app.run(host='0.0.0.0', port=SEARCH_SERVICE_PORT, debug=True)
+    app.run(host='0.0.0.0', port=SEARCH_SERVICE_PORT)
