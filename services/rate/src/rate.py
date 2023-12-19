@@ -3,12 +3,9 @@ from typing import List
 
 from flask import Flask, jsonify, request
 
-from data.data_load_module import load_data, build_inventory_index, inventory_index
+from data.data_load_module import inventory_index
 
 app = Flask(__name__)
-
-global_data = None
-RATE_SERVICE_PORT = 8080
 
 
 @dataclass
@@ -60,9 +57,3 @@ def get_rates_endpoint():
 
     rate_plans = get_rates(hotel_ids, in_date, out_date)
     return jsonify(rate_plans)
-
-
-def serve():
-    load_data()
-    build_inventory_index()
-    app.run(host='0.0.0.0', port=8080)

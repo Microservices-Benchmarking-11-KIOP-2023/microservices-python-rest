@@ -1,6 +1,5 @@
 import json
 import os
-from collections import defaultdict
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 data_store = {}
@@ -26,3 +25,7 @@ def build_hotel_profiles_index():
     for hotel in hotel_profiles_data:
         hotel_id = hotel["id"]
         hotel_profiles_index[hotel_id] = hotel
+
+
+load_data()
+build_hotel_profiles_index()

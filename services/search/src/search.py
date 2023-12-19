@@ -3,7 +3,6 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-SEARCH_SERVICE_PORT = 8080
 GEO_SERVICE_ADDRESS = 'http://geo:8080/geo'
 RATE_SERVICE_ADDRESS = 'http://rate:8080/rate'
 
@@ -29,7 +28,3 @@ def search_nearby():
     available_hotel_ids = [rate_plan["hotelId"] for rate_plan in rate_response]
 
     return jsonify({"hotelIds": available_hotel_ids})
-
-
-def serve():
-    app.run(host='0.0.0.0', port=SEARCH_SERVICE_PORT)

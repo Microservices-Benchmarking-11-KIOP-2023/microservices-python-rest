@@ -29,3 +29,7 @@ def build_inventory_index():
         in_date = item["inDate"]
         out_date = item["outDate"]
         inventory_index[hotel_id][in_date][out_date] = item
+
+
+load_data()
+build_inventory_index()

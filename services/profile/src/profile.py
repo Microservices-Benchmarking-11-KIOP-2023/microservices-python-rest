@@ -1,14 +1,8 @@
 from flask import Flask, jsonify, request
 
-from data.data_load_module import (
-    load_data,
-    build_hotel_profiles_index,
-    hotel_profiles_index,
-)
+from data.data_load_module import hotel_profiles_index
 
 app = Flask(__name__)
-
-PROFILE_SERVICE_PORT = 8080
 
 
 def build_profile_response(matching_profiles):
@@ -48,9 +42,3 @@ def get_profiles():
     response_data = build_profile_response(matching_profiles)
 
     return jsonify(response_data)
-
-
-def serve():
-    load_data()
-    build_hotel_profiles_index()
-    app.run(host="0.0.0.0", port=PROFILE_SERVICE_PORT)
